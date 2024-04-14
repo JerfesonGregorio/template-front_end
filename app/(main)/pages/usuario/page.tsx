@@ -168,13 +168,13 @@ const Crud = () => {
     //     setProduct(_product);
     // };
 
-    // const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
-    //     const val = (e.target && e.target.value) || '';
-    //     let _product = { ...product };
-    //     _product[`${name}`] = val;
+     const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, name: string) => {
+        const val = (e.target && e.target.value) || '';
+        let _usuario = { ...usuario };
+        _usuario[`${nome}`] = val;
 
-    //     setProduct(_product);
-    // };
+        setUsuario(_usuario);
+    };
 
     // const onInputNumberChange = (e: InputNumberValueChangeEvent, name: string) => {
     //     const val = e.value || 0;
@@ -260,7 +260,7 @@ const Crud = () => {
         </div>
     );
 
-    const UsuarioDialogFooter = (
+    const usuarioDialogFooter = (
         <>
             <Button label="Cancelar" icon="pi pi-times" text onClick={hideDialog} />
             <Button label="Salvar" icon="pi pi-check" text onClick={saveUsuario} />
@@ -313,76 +313,86 @@ const Crud = () => {
                         <Column body={actionBodyTemplate} headerStyle={{ minWidth: '10rem' }}></Column>
                     </DataTable>
 
-                    <Dialog visible={usuarioDialog} style={{ width: '450px' }} header="Detalhes de Usuário" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
-                        {product.image && <img src={`/demo/images/product/${product.image}`} alt={product.image} width="150" className="mt-0 mx-auto mb-5 block shadow-2" />}
+                    <Dialog visible={usuarioDialog} style={{ width: '450px' }} header="Detalhes de Usuário" modal className="p-fluid" footer={usuarioDialogFooter} onHide={hideDialog}>
+                        
                         <div className="field">
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="nome">Nome</label>
                             <InputText
-                                id="name"
-                                value={product.name}
-                                onChange={(e) => onInputChange(e, 'name')}
+                                id="nome"
+                                value={usuario.nome}
+                                onChange={(e) => onInputChange(e, 'nome')}
                                 required
                                 autoFocus
                                 className={classNames({
-                                    'p-invalid': submitted && !product.name
+                                    'p-invalid': submitted && !usuario.nome
                                 })}
                             />
-                            {submitted && !product.name && <small className="p-invalid">Name is required.</small>}
-                        </div>
-                        <div className="field">
-                            <label htmlFor="description">Description</label>
-                            <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
+                            {submitted && !usuario.nome && <small className="p-invalid">Nome é obrigatório.</small>}
                         </div>
 
                         <div className="field">
-                            <label className="mb-3">Category</label>
-                            <div className="formgrid grid">
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
-                                    <label htmlFor="category1">Accessories</label>
-                                </div>
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
-                                    <label htmlFor="category2">Clothing</label>
-                                </div>
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
-                                    <label htmlFor="category3">Electronics</label>
-                                </div>
-                                <div className="field-radiobutton col-6">
-                                    <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
-                                    <label htmlFor="category4">Fitness</label>
-                                </div>
-                            </div>
+                            <label htmlFor="email">Email</label>
+                            <InputText
+                                id="email"
+                                value={usuario.email}
+                                onChange={(e) => onInputChange(e, 'email')}
+                                required
+                                autoFocus
+                                className={classNames({
+                                    'p-invalid': submitted && !usuario.email
+                                })}
+                            />
+                            {submitted && !usuario.email && <small className="p-invalid">Email é obrigatório.</small>}
                         </div>
 
-                        <div className="formgrid grid">
-                            <div className="field col">
-                                <label htmlFor="price">Price</label>
-                                <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
-                            </div>
-                            <div className="field col">
-                                <label htmlFor="quantity">Quantity</label>
-                                <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} />
-                            </div>
+                        <div className="field">
+                            <label htmlFor="login">Login</label>
+                            <InputText
+                                id="login"
+                                value={usuario.login}
+                                onChange={(e) => onInputChange(e, 'login')}
+                                required
+                                autoFocus
+                                className={classNames({
+                                    'p-invalid': submitted && !usuario.login
+                                })}
+                            />
+                            {submitted && !usuario.login && <small className="p-invalid">Login é obrigatório.</small>}
                         </div>
+
+                        <div className="field">
+                            <label htmlFor="senha">Senha</label>
+                            <InputText
+                                id="senha"
+                                value={usuario.senha}
+                                onChange={(e) => onInputChange(e, 'senha')}
+                                required
+                                autoFocus
+                                className={classNames({
+                                    'p-invalid': submitted && !usuario.senha
+                                })}
+                            />
+                            {submitted && !usuario.senha && <small className="p-invalid">Senha é obrigatório.</small>}
+                        </div>
+
+                            
                     </Dialog>
 
-                    <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
+                    <Dialog visible={deleteUsuarioDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteUsuarioDialogFooter} onHide={hideDeleteUsuarioDialog}>
                         <div className="flex align-items-center justify-content-center">
                             <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                            {product && (
+                            {usuario && (
                                 <span>
-                                    Are you sure you want to delete <b>{product.name}</b>?
+                                    Você realmente deseja excluir o usuário <b>{usuario.nome}</b>?
                                 </span>
                             )}
                         </div>
                     </Dialog>
 
-                    <Dialog visible={deleteProductsDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductsDialogFooter} onHide={hideDeleteProductsDialog}>
+                    <Dialog visible={deleteUsuariosDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteUsuariosDialogFooter} onHide={hideDeleteUsuariosDialog}>
                         <div className="flex align-items-center justify-content-center">
                             <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                            {product && <span>Are you sure you want to delete the selected products?</span>}
+                            {usuario && <span>Você realmente deseja excluir oss usuários selecionados?</span>}
                         </div>
                     </Dialog>
                 </div>
