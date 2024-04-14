@@ -7,5 +7,10 @@ declare namespace Projeto {
         senha: string;
     }
 
+    type Recurso = {
+        id?: number;
+        nome: string;
+        chave: string;
+    }
 
 }

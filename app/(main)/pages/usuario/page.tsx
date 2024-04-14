@@ -12,15 +12,6 @@ import { classNames } from 'primereact/utils';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { UsuarioService } from '@/service/UsuarioService';
 
-interface Usuario { 
-    id?: number; 
-    nome: string; 
-    email: string; 
-    login: string; 
-    senha: string; 
-    [key: string]: number | string | undefined;
-}
-
 const Usuario = () => {
     let usuarioVazio: Projeto.Usuario = {
         id: 0,
@@ -192,10 +183,14 @@ const Usuario = () => {
 
      const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, nome: string) => {
         const val = (e.target && e.target.value) || '';
-        let _usuario: Usuario = { ...usuario };
-        _usuario[`${nome}`] = val;
+        // let _usuario: Usuario = { ...usuario };
+        // _usuario[`${nome}`] = val;
 
-        setUsuario(_usuario);
+        // setUsuario(_usuario);
+        setUsuario(prevUsuario => ({
+            ...prevUsuario,
+            [nome]: val,
+        }))
     };
 
 
