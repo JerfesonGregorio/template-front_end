@@ -19,7 +19,7 @@ const Recurso = () => {
         chave: ''
     };
 
-    const [recursos, setRecursos] = useState<Projeto.Recurso[]>([]);
+    const [recursos, setRecursos] = useState<Projeto.Recurso[] | null>(null);
     const [recursoDialog, setRecursoDialog] = useState(false);
     const [deleteRecursoDialog, setDeleteRecursoDialog] = useState(false);
     const [deleteRecursosDialog, setDeleteRecursosDialog] = useState(false);
@@ -32,7 +32,7 @@ const Recurso = () => {
     const recursoService = useMemo(() => new RecursoService(), []);
 
     useEffect(() => {
-        if(recursos.length == 0){
+        if(!recursos){
             recursoService.listarTodos()
             .then((response) => {
                 console.log(response.data);
@@ -72,7 +72,7 @@ const Recurso = () => {
             .then((res) => {
                 setRecursoDialog(false);
                 setRecurso(recursoVazio);
-                setRecursos([]);
+                setRecursos(null);
                 toast.current?.show({
                     severity: 'info',
                     summary: 'Sucesso!',
@@ -91,7 +91,7 @@ const Recurso = () => {
             .then((res) => {
                 setRecursoDialog(false);
                 setRecurso(recursoVazio);
-                setRecursos([]);
+                setRecursos(null);
                 toast.current?.show({
                     severity: 'success',
                     summary: 'Sucesso!',
@@ -126,7 +126,7 @@ const Recurso = () => {
             .then((res) => {
                 setRecurso(recursoVazio);
                 setDeleteRecursoDialog(false);
-                setRecursos([]);
+                setRecursos(null);
                 toast.current?.show({
                     severity: 'success',
                     summary: 'Sucesso!',
@@ -160,7 +160,7 @@ const Recurso = () => {
                 await recursoService.excluir(_recurso.id)
             }
         })).then((res) => {
-            setRecursos([]);
+            setRecursos(null);
             setSelectedRecursos([]);
             setDeleteRecursosDialog(false);
 
