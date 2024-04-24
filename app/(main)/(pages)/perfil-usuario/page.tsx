@@ -32,7 +32,7 @@ const PerfilUsuario = () => {
     const [deletePerfilUsuarioDialog, setDeletePerfilUsuarioDialog] = useState(false);
     const [deletePerfilUsuariosDialog, setDeletePerflUsuariosDialog] = useState(false);
     const [perfilUsuario, setPerfilUsuario] = useState<Projeto.PerfilUsuario>(perfilUsuarioVazio);
-    const [selectedPerfilUsuarios, setSelectedPerflUsuarios] = useState<Projeto.PerfilUsuario[]>([]);
+    const [selectedPerfilUsuarios, setSelectedPerfilUsuarios] = useState<Projeto.PerfilUsuario[]>([]);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState('');
     const toast = useRef<Toast>(null);
@@ -196,7 +196,7 @@ const PerfilUsuario = () => {
             }
         })).then((res) => {
             setPerfilUsuarios(null);
-            setSelectedPerflUsuarios([]);
+            setSelectedPerfilUsuarios([]);
             setDeletePerflUsuariosDialog(false);
 
             toast.current?.show({
@@ -322,7 +322,7 @@ const PerfilUsuario = () => {
                         ref={dt}
                         value={perfilUsuarios}
                         selection={selectedPerfilUsuarios}
-                        onSelectionChange={(e) => setSelectedPerflUsuarios(e.value as any)}
+                        onSelectionChange={(e) => setSelectedPerfilUsuarios(e.value as any)}
                         dataKey="id"
                         paginator
                         rows={10}

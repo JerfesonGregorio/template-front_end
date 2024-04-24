@@ -8,4 +8,3 @@ export class UsuarioService extends BaseService{
     }
     
 }
-
