@@ -44,7 +44,7 @@ const NewUserPage = () => {
         loginService.novoCadastro(usuario).then((res) => {
             setUsuario(usuarioVazio);
             toast.current?.show({
-                severity: 'info',
+                severity: 'success',
                 summary: 'Sucesso!',
                 detail: 'Usuário cadastrado com suscesso!'
             })
