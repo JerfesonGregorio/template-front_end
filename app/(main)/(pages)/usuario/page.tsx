@@ -76,7 +76,7 @@ const Usuario = () => {
                 setUsuario(usuarioVazio);
                 setUsuarios(null);
                 toast.current?.show({
-                    severity: 'info',
+                    severity: 'success',
                     summary: 'Sucesso!',
                     detail: 'Usuário cadastrado com suscesso!'
                 });
