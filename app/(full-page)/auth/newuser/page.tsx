@@ -16,7 +16,8 @@ const NewUserPage = () => {
         nome: '',
         email: '',
         login: '',
-        senha:''
+        senha: '',
+        situacao: ''
     };
 
     const [usuario, setUsuario] = useState(usuarioVazio);

@@ -24,6 +24,7 @@ const PerfilUsuario = () => {
             email: '',
             login: '',
             senha: '',
+            situacao: ''
         }
     };
 

@@ -11,6 +11,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { classNames } from 'primereact/utils';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { UsuarioService } from '@/service/UsuarioService';
+import { LoginService } from '@/service/LoginService';
 
 const Usuario = () => {
     let usuarioVazio: Projeto.Usuario = {
@@ -18,7 +19,8 @@ const Usuario = () => {
         nome: '',
         email: '',
         login: '',
-        senha:''
+        senha: '',
+        situacao: ''
     };
 
     const [usuarios, setUsuarios] = useState<Projeto.Usuario[] | null>(null);
@@ -32,6 +34,7 @@ const Usuario = () => {
     const toast = useRef<Toast>(null);
     const dt = useRef<DataTable<any>>(null);
     const usuarioService = useMemo(() => new UsuarioService(), []);
+    const loginService = useMemo(() => new LoginService(), [])
 
     useEffect(() => {
         if(!usuarios){
@@ -70,7 +73,7 @@ const Usuario = () => {
         setSubmitted(true);
 
         if(!usuario.id) {
-            usuarioService.inserir(usuario)
+            loginService.novoCadastro(usuario)
             .then((res) => {
                 setUsuarioDialog(false);
                 setUsuario(usuarioVazio);
@@ -249,6 +252,19 @@ const Usuario = () => {
             </>
         );
     };
+    const situacaoBodyTemplate = (rowData: Projeto.Usuario) => {
+        
+        let status = (rowData.situacao == 'P') ? 'PENDENTE'
+            : (rowData.situacao == 'A') ? 'ATIVO'
+            : 'INATIVO'
+
+        return (
+            <>
+                <span className="p-column-title">Status</span>
+                {status}
+            </>
+        );
+    };
 
 
     const actionBodyTemplate = (rowData: Projeto.Usuario) => {
@@ -318,7 +334,7 @@ const Usuario = () => {
                         <Column field="nome" header="Nome" sortable body={nomeBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
                         <Column field="login" header="Login" sortable body={loginBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
                         <Column field="email" header="Email" sortable body={emailBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
-
+                        <Column field="situacao" header="Status" sortable body={situacaoBodyTemplate} headerStyle={{ minWidth: '15rem' }}></Column>
 
                         <Column body={actionBodyTemplate} headerStyle={{ minWidth: '10rem' }}></Column>
                     </DataTable>
